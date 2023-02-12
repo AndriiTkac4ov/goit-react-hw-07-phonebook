@@ -14,7 +14,6 @@ export default function ContactList() {
     }
     
     const filteredContacts = getFilteredContacts();
-    console.log(filteredContacts);
 
     return (
         <ContactsList>

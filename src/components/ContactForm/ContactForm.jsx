@@ -10,7 +10,6 @@ const ContactForm = () => {
     const [number, setNumber] = useState('');
 
     const contacts = useSelector(getContacts);
-    console.log(contacts);
     const dispatch = useDispatch();
 
     const handleInputChange = (event) => {
