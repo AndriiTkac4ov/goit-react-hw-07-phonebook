@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { persistReducer } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
 
 const contactsInitialState = {
-    contactsGroup: [],
+  items: [],
+  isLoading: false,
+  error: null,
 };
 
 const contactsSlice = createSlice({
@@ -14,25 +14,15 @@ const contactsSlice = createSlice({
   // Об'єкт редюсерів
     reducers: {
         addContact(state, action) {
-            state.contactsGroup.push(action.payload)
+          state.items.push(action.payload)
         },
         deleteContact(state, action) {
-            state.contactsGroup = state.contactsGroup.filter(({ id }) => id !== action.payload)
+          state.items = state.items.filter(({ id }) => id !== action.payload)
         },
     },
 });
 
-// const persistConfig = {
-//   key: 'contacts',
-//   storage,
-// }
-
 // Генератори екшенів
 export const { addContact, deleteContact } = contactsSlice.actions;
 // Редюсер слайсу
-// export const contactsReducer = persistReducer(
-//   persistConfig,
-//   contactsSlice.reducer,
-// )
-
 export const contactsReducer = contactsSlice.reducer;

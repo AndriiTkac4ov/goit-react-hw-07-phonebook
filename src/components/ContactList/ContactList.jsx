@@ -11,6 +11,7 @@ import { useEffect } from "react";
 
 export default function ContactList() {
     const contacts = useSelector(getContacts);
+    console.log(contacts);
     const filter = useSelector(getFilter);
 
     const dispatch = useDispatch();
