@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts } from "./contactsOperations";
+import { fetchContacts, addContact, deleteContact } from "./contactsOperations";
 
 const contactsInitialState = {
   items: [],
@@ -13,33 +13,46 @@ const contactsSlice = createSlice({
   // Початковий стан редюсера слайсу
   initialState: contactsInitialState,
   // Об'єкт редюсерів
-  extraReducers: {
-    // builder
-    [fetchContacts.pending]: state => {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [fetchContacts.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.items = action.payload;
-    },
-    [fetchContacts.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    }
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(addContact.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items.push(action.payload);
+      })
+      .addCase(addContact.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteContact.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = state.items.filter(({ id }) => id !== action.payload.id);
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
   }
-
-    // reducers: {
-    //     addContact(state, action) {
-    //       state.items.push(action.payload)
-    //     },
-    //     deleteContact(state, action) {
-    //       state.items = state.items.filter(({ id }) => id !== action.payload)
-    //     },
-    // },
 });
 
-// Генератори екшенів
-export const { addContact, deleteContact } = contactsSlice.actions;
 // Редюсер слайсу
 export const contactsReducer = contactsSlice.reducer;

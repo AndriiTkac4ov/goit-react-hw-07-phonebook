@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { getContacts } from "redux/selectors";
-import { addContact } from "redux/contacts/contactsSlice";
+import * as contactsOperations from "redux/contacts/contactsOperations";
 import { Form, LabelField, InputField, ButtonAdding } from "./ContactForm.styled";
 
 const ContactForm = () => {
@@ -33,7 +33,7 @@ const ContactForm = () => {
         const newContact = {
             id: nanoid(),
             name,
-            number,
+            phone: number,
         };
 
         const isContactNameInList = contactName => {
@@ -45,7 +45,7 @@ const ContactForm = () => {
             return;
         };
 
-        dispatch(addContact(newContact));
+        dispatch(contactsOperations.addContact(newContact));
 
         setName('');
         setNumber('');
