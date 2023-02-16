@@ -5,7 +5,7 @@ import { ContactsList } from "./ContactList.styled";
 import ContactItem from '../ContactItem/ContactItem';
 
 // ============
-import * as contactsOperations from "../../redux/contacts/contactsOperations";
+import * as contactsOperations from "redux/contacts/contactsOperations";
 // ============
 
 export default function ContactList() {
