@@ -1,12 +1,11 @@
-// import { useSelector } from "react-redux";
-import { getContacts, getFilter } from "../../redux/selectors";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getContacts, getFilter } from "redux/selectors";
 import { ContactsList } from "./ContactList.styled";
 import ContactItem from '../ContactItem/ContactItem';
 
 // ============
 import * as contactsOperations from "../../redux/contacts/contactsOperations";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 // ============
 
 export default function ContactList() {

@@ -1,7 +1,7 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
 import * as contactsActions from "./contactsActions";
 
-const entities = createReducer([], {
+const items = createReducer([], {
     [contactsActions.fetchContactsSuccess]: (_, action) => action.payload
 })
 
@@ -17,7 +17,7 @@ const isError = createReducer(null, {
 })
 
 export default combineReducers({
-    entities,
+    items,
     isLoading,
     isError,
 })
